@@ -1,0 +1,602 @@
+<html>
+
+<head>
+    <!--Links Originais-->
+    <link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css" />
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+    <script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <script language="javascript" type="text/javascript" src="custom.js"></script>
+    <script language="javascript" type="text/javascript" src="validacao.js"></script>
+<!-- vcXMLRPC -->
+    <script type="text/javascript" src="../vcXMLRPC.js"></script>
+    <script type="text/javascript" src="../vcXMLRPC-mobile.js"></script>
+
+</head>
+
+<body>
+    <div class="fluig-style-guide">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center" id="top">
+                    <p><strong>Requisição de Vagas</strong></p>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12 text-center">
+                    <div style="background: url('http://ww2.baguete.com.br/admin//cache/image/noticias/2014/01/1390248783_totvs.jpg'); background-size: contain; background-position: center center; background-repeat: no-repeat; width: 100%; height: 9rem;"></div>
+                    <!--                    <img src="../../resources/images/totvs_logo.jpg" class="img-responsive" />-->
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 PULL-RIGHT" id="campoCabecalho">
+                    <p>Data de Solicitação: <span name="dtSol" id="dtSol"></span></p>
+                    <p>Código da Vaga: 00123213</p>
+                </div>
+            </div>
+            <!--
+            <div class="page-header">
+                <h1><small>PREENCHIMENTO DA ÁREA</small></h1>
+            </div>
+-->
+            <div class="panel-group" id="formularioReq">
+                <form class="form" role="form">
+
+                    <fieldset id="fsDadosArea">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <span class="fluigicon fluigicon-user fluigicon-lg icone-span"></span>
+                                    DADOS DA VAGA</h3>
+                            </div>
+                            <div class="panel-body">                            
+                                <div class="row">
+                                    <div class="form-group fs-clearfix">
+                                        <div class="form-group col-md-3 col-sm-3 col-xs-12">
+                                            <label for="mesSolicita">Mês de Solicitação</label>
+                                            <input type='text' class="form-control" name="mesSol" id="mesSol" readonly>
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                            <label for="unidade">Unidade de Contratação</label>
+                                            <select class="form-control" name="unidCont" id="unidCont">
+                                                <option value='TBC - GOIANIA'>TBC BRASIL CENTRAL - GOIANIA</option>
+                                                <option value='TBC - BRASILIA'>TBC BRASIL CENTRAL - BRASILIA</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                            <label>Centro de Custo / Área</label>
+                                            <input type="zoom" id="centroCusto" name="centroCusto" data-zoom="{
+                                                'displayKey':'Centro de Custo',
+                                                'datasetId':'zCentroDeCusto',
+                                                'maximumSelectionLength':'1',
+                                                'fields':[
+                                                    {
+                                                      'field':'Codigo',
+                                                      'label':'Código',
+                                                      'standard':'true'
+                                                    },
+                                                    {
+                                                      'field':'Centro de Custo',
+                                                      'label':'Nome'
+                                                    }
+                                                ]
+                                             }" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group fs-clearfix">                                    
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label>Diretor</label>
+                                            <!--                                        <input class="form-control" name="diretor" type="text">-->
+                                            <input type="zoom" id="diretor" name="diretor" data-zoom="{
+                                                'displayKey':'colleagueName',
+                                                'datasetId':'colleague',
+                                                'maximumSelectionLength':'1',
+                                                'fields':[
+                                                    {
+                                                      'field':'colleagueName',
+                                                      'label':'Nome',
+                                                      'standard':'true'
+                                                    }
+                                                ]
+                                             }" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label>Gestor</label>
+                                            <input type="zoom" id="gestor" name="gestor" data-zoom="{
+                                                'displayKey':'colleagueName',
+                                                'datasetId':'colleague',
+                                                'maximumSelectionLength':'1',
+                                                'fields':[
+                                                    {
+                                                      'field':'colleagueName',
+                                                      'label':'Nome',
+                                                      'standard':'true'
+                                                    }
+                                                ]
+                                             }" />
+                                             <input type="hidden" id='idSolicitante' name='idSolicitante'>
+                                        </div>
+<!--                                     <div class="form-group col-md-6 col-sm-6">
+                                        <label for="area">Área</label>
+                                        <input class="form-control" name="area" type="text">
+                                    </div> -->
+                                    </div>
+                                    <div class="form-group fs-clearfix">
+                                        <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                            <label for="cargoPrevisto">Cargo Previsto</label>
+                                            <input class="form-control" name="cargoPrevisto" id="cargoPrevisto" type="text">
+                                        </div>
+                                        <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                            <label for="step">STEP</label>
+                                            <select class="form-control" name="step" id="step">
+                                                <option value='..'>Selecione..</option>
+                                                <option value='Não se Aplica'>Não se Aplica</option>
+                                                <option value='STEP 01'>STEP 01</option>
+                                                <option value='STEP 02'>STEP 02</option>
+                                                <option value='STEP 03'>STEP 03</option>
+                                                <option value='STEP 04'>STEP 04</option>
+                                                <option value='STEP 05'>STEP 05</option>
+                                                <option value='STEP 06'>STEP 06</option>
+                                            </select>
+                                        </div>                                    
+                                        <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                            <label for="salarioBase">Salário Base</label>
+                                            <input class="form-control" name="salarioBase" id="salarioBase" maxlength="12" mask="000.000.000.000.000,00" type="text">
+                                        </div>
+
+                                        <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                            <label for="rv">RV</label>
+                                            <input class="form-control" name="rv" id="rv" mask="000.000.000.000.000,00" type="text">
+                                        </div>
+
+                                        <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                            <label for="salarioTotal">Salário Total</label>
+                                            <input class="form-control" name="salarioTotal" id="salarioTotal" maxlength="12" mask="000.000.000.000.000,00" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group fs-clearfix">
+                                        <div class="form-group col-md-12 col-sm-12  col-xs-12 text-center" style="background-color:#EEE; padding: 10px 0; border-radius: 10px;">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" name="rv_check" id="rv_check" value="RV"> RV
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" name="comissao" id="comissao" value="Comissão"> Comissão
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" name="warmup" id="warmup" value="Warmup de 3 meses"> Warmup de 3 meses
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--<div class="form-group col-md-6 col-sm-12">
+                                        <p>Acessos Necessários:</p>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="crm" value="CRM"> CRM
+                                        </label> 
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="servidor" value="Servidor"> SERVIDOR
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="codtec" value="codigo"> CÓD. TÉCNICO
+                                        </label>
+                                    </div> -->
+                                    <div class="form-group fs-clearfix">                                    
+                                        <div class="form-group col-md-4 col-sm-3 col-xs-12 pull-left" id="precisaCV">
+                                            <p>Necessita de confecção de Cartão de Visita?</p>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="precisaCV" id="precisaCVS" value="Sim"> Sim
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="precisaCV" id="precisaCVN" value="Não"> Não
+                                            </label>
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12 pull-left" id="precisaPC">
+                                            <p>Necessita de Computador?</p>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="precisaPC" id="precisaPCS" value="Sim"> Sim
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="precisaPC" id="precisaPCN" value="Não"> Não
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group fs-clearfix">
+                                        <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                            <label for="tipoContrata">Tipo de Contratação</label>
+                                            <select class="form-control" name="tipoContratacao" id="tipoContratacao">
+                                                <option value='..'>Selecione..</option>
+                                                <option value='CLT'>CLT</option>
+                                                <option value='Cooperativa'>Cooperativa</option>
+                                                <option value='PJ'>PJ</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                            <label for="tipoContrata">Origem da Vaga</label>
+                                            <select class="form-control" name="origVaga" id="origVaga">
+                                                <option value='..'>Selecione..</option>
+                                                <option value='Aumento de Quadro'>Aumento de Quadro</option>
+                                                <option value='Reestruturação - Transferência de Atividade'>Reestruturação - Transferência de Atividade</option>
+                                                <option value='Substituição'>Substituição</option>
+                                                <option value='Estagiário'>Estagiário</option>
+                                                <option value='Temporário'>Temporário</option>
+                                            </select>
+                                        </div>
+                                       <!-- <div class="form-group col-md-2 col-sm-2">
+                                            <label for="partAnterior">Participante Anterior?</label>
+                                            <select class="form-control" name="partAnterior" id="partAnterior">
+                                                <option value="sim">Sim</option>
+                                                <option value="nao" selected>Não</option>
+                                            </select>
+                                        </div> -->
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12" id='divNomePart' style='display: none;'>
+                                            <label for="partAnteriorNome">Nome do Participante</label>
+                                            <input class="form-control" id="partAnteriorNome" name="partAnteriorNome" type="text">
+                                        </div>
+                                        <div class="form-group col-md-2 col-md-2 col-xs-12" id='divDtPart' style='display: none;'>
+                                            <label for="dataMov">Data da Movimentação</label>
+                                            <div class="input-group date calend" id="dataMov">
+                                                <input type="text" class="form-control" name="datMov" placeholder="Data de Movimentação">
+                                                <span class="input-group-addon">
+                                                    <span class="fluigicon fluigicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group fs-clearfix">
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12" id='divMotSubs' style='display: none;'>
+                                            <label for="motivoSubs">Motivo da Substituição</label>
+                                            <select class="form-control" name="motivoSubs" id="motivoSubs">
+                                                <option value='..'>Selecione..</option>
+                                                <option value='Afastamento INSS'>Afastamento INSS</option>
+                                                <option value='Não Aplicável'>Não Aplicável</option>
+                                                <option value='Efetivação de Estágio'>Efetivação de Estágio</option>
+                                                <option value='Licença Maternidade'>Licença Maternidade</option>
+                                                <option value='Promoção'>Promoção</option>
+                                                <option value='Demissão Involuntária (Empresa)'>Demissão Involuntária (Empresa)</option>
+                                                <option value='Demissão Voluntária (Participante)'>Demissão Voluntária (Participante)</option>
+                                                <option value='Transferência - Unidade/Área de Destino'>Transferência - Unidade/Área de Destino</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label for="motivoSubs">Observação.:</label>
+                                            <textarea class="form-control" name="obs1" id="obs1" rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="fsDadosTecnico">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <span class="fluigicon fluigicon-user fluigicon-lg icone-span"></span>
+                                    PERFIL TÉCNICO E COMPORTAMENTAL
+                                </h3>
+                            </div>
+                            <div class="panel-body">                            
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label for="vagaCarac">Descreva as principais características da vaga:</label>
+                                            <textarea name="vagaCarac" id="vagaCarac" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label for="jsVaga">Justificativa da vaga:</label>
+                                            <textarea name="jsVaga" id="jsVaga" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <br />
+                                        <label>Descreva no <u>mínimo</u> 03 conhecimentos técnicos <b>NECESSÁRIOS</b> e 03 <b>DESEJADOS</b> por ordem de prioridade para vaga.</label>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label for="reqNecessarios">Necessários:</label>
+                                            <textarea name="reqNecessarios" id="reqNecessarios" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label for="reqDesejados">Desejados:</label>
+                                            <textarea name="reqDesejados" id="reqDesejados" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-12 col-xs-12">
+                                            <div class="col-md-12  col-xs-12">
+                                                <label>Comportamental</label>
+                                            </div>
+                                            <div class="col-md-4  col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp01" id="checkcomp01" value="percepcao"> Percepção e Visão
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp02" id="checkcomp02" value="observacao"> Observação e Análise
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp03" id="checkcomp03" value="oportunidade"> Oportunidade
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp04" id="checkcomp04" value="competitividade"> Competitividade
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp05"  id="checkcomp05" value="qualidade"> Qualidade de Vida
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp06" id="checkcomp06" value="decisao"> Decisão e Estratégia
+                                                </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp07" id="checkcomp07" value="Versatilidade"> Versatilidade
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp08" id="checkcomp08" value="foco"> Observação e Foco
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp09" id="checkcomp09" value="habilidade"> Habilidade
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp10" id="checkcomp10" value="inovacao"> Inovação
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp11"  id="checkcomp11" value="lideranca"> Liderança
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp12" id="checkcomp12" value="ousadia"> Ousadia
+                                                </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-xs-12">
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp13" id="checkcomp13" value="relacao"> Relação
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp14" id="checkcomp14" value="espequipe"> Espírito em Equipe
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp15" id="checkcomp15" value="dinamismo"> Dinamismo e Execução
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp16" id="checkcomp16" value="pionerismo"> Prionerismo
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp17"  id="checkcomp17" value="disconhecimento"> Disseminação do Conhecimentos
+                                                </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input type="checkbox" name="checkcomp18" id="checkcomp18" value="outros"> Outros
+                                                </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="fsAprovacao" style='display: none;'>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <span class="fluigicon fluigicon-transfer fluigicon-lg icone-span"></span>
+                                    APROVAÇÕES</h3>
+                            </div>
+                            <div class="panel-body">                        
+                                <div class="row">
+                                    <div class="panel-group" id="accordion">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h5 class="panel-title">
+                                                    <a class="collapse-icon" data-toggle="collapse" data-parent="#accordion" href="#collapseRh">Aprovação RH</a>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseRh" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <div class="form-group fs-clearfix">
+                                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                                            <label for="nomeRespRh">Responsável</label>
+                                                            <input class="form-control" id="nomeRespRh" name="nomeRespRh" type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-4 col-md-4 col-xs-12">
+                                                            <label for="dataAprovRh">Data da Aprovação</label>
+                                                            <div class="input-group date calend">
+                                                                <input type="text" class="form-control" name="dataAprovRh" id="dataAprovRh">
+                                                                <span class="input-group-addon">
+                                                                    <span class="fluigicon fluigicon-calendar"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                                            <label for="aprovRh">Aprovação</label>
+                                                            <select class="form-control" name="aprovRh" id="aprovRh">
+                                                                <option value='..'>Selecione..</option>
+                                                                <option value='Sim'>Sim</option>
+                                                                <option value='Retornar Inicio'>Retornar Inicio</option>
+                                                                <option value='Não'>Não</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group fs-clearfix">
+                                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                                            <label for="obsRh">Parecer</label>
+                                                            <textarea class="form-control" name="obsRh" id="obsRh" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="panel-group" id="accordion">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h5 class="panel-title">
+                                                    <a class="collapse-icon" data-toggle="collapse" data-parent="#accordion" href="#collapseAdm">Aprovação Adm/Financeiro</a>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseAdm" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <div class="form-group fs-clearfix">
+                                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                                            <label for="nomeRespAdm">Responsável</label>
+                                                            <input class="form-control" id="nomeRespAdm" name="nomeRespAdm" type="text" readonly>
+                                                        </div>
+                                                        <div class="form-group col-md-4 col-md-4 col-xs-12">
+                                                            <label for="dataAprovAdm">Data da Aprovação</label>
+                                                            <div class="input-group date calend">
+                                                                <input type="text" class="form-control" name="dataAprovAdm" id="dataAprovAdm" readonly>
+                                                                <span class="input-group-addon">
+                                                                    <span class="fluigicon fluigicon-calendar"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                                            <label for="aprovAdm">Aprovação</label>
+                                                            <select class="form-control" name="aprovAdm" id="aprovAdm">
+                                                                <option value='..'>Selecione..</option>
+                                                                <option value='Sim'>Sim</option>
+                                                                <option value='Retornar RH'>Retornar RH</option>
+                                                                <option value='Não'>Não</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group fs-clearfix">
+                                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                                            <label for="obsAdm">Parecer</label>
+                                                            <textarea class="form-control" name="obsAdm" id="obsAdm" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="panel-group" id="accordion">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h5 class="panel-title">
+                                                    <a class="collapse-icon" data-toggle="collapse" data-parent="#accordion" href="#collapseCeo">Aprovação CEO</a>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseCeo" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <div class="form-group fs-clearfix">
+                                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                                            <label for="nomeRespCeo">Responsável</label>
+                                                            <input class="form-control" id="nomeRespCeo" name="nomeRespCeo" type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-4 col-md-4 col-xs-12">
+                                                            <label for="dataAprovCeo">Data da Aprovação</label>
+                                                            <div class="input-group date calend">
+                                                                <input type="text" class="form-control" name="dataAprovCeo" id="dataAprovCeo">
+                                                                <span class="input-group-addon">
+                                                                    <span class="fluigicon fluigicon-calendar"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                                            <label for="aprovCeo">Aprovação</label>
+                                                            <select class="form-control" name="aprovCeo" id="aprovCeo">
+                                                                <option value='..'>Selecione..</option>
+                                                                <option value='Sim'>Sim</option>
+                                                                <option value='Não'>Não</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group fs-clearfix">
+                                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                                            <label for="obsCeo">Parecer</label>
+                                                            <textarea class="form-control" name="obsCeo" id="obsCeo" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="fsDadosTecnico" style='display: none;'>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">INFORMAÇÕES DA VAGA FECHADA</h3>
+                            </div>
+                            <div class="panel-body">                        
+                                <div class="row inputdisabled">
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <label for="nomeContratado">Nome do Contratado</label>
+                                        <input class="form-control" name="nomeContratado" id="nomeContratado" type="text">
+                                    </div>
+                                    <div class="form-group col-md-3 col-xs-12">
+                                        <label for="dataFechamento">Data de Fechamento</label>
+                                        <div class="input-group date calend" id="dataFechamento">
+                                            <input type="text" class="form-control" name="dataFechamento" id="dataFechamento" placeholder="Data de Fechamento">
+                                            <span class="input-group-addon">
+                                                <span class="fluigicon fluigicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3 col-xs-12">
+                                        <label for="dataFechamento">Data de Início</label>
+                                        <div class="input-group date calend" id="dataInicio">
+                                            <input type="text" class="form-control" name="dataInicio" id="dataInicio" placeholder="Data de Início">
+                                            <span class="input-group-addon">
+                                                <span class="fluigicon fluigicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                        <label for="cargo">Cargo</label>
+                                        <input class="form-control" name="cargo" id="cargo" type="text">
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                        <label for="step01">Step</label>
+                                        <input class="form-control" name="step01" id="step01" type="text">
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                        <label for="salario">Salário</label>
+                                        <input class="form-control" maxlength="12" name="salario" id="salario" mask="#00.000.000.000.000,00" placeholder="R$" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var dataMov = FLUIGC.calendar('.calend', {
+            pickDate: true,
+            pickTime: false
+        });
+    </script>
+</body>
+
+</html>

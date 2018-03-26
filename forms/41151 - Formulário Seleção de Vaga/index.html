@@ -1,0 +1,481 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+<!-- Links Locais
+    <link type="text/css" rel="stylesheet" href="../../resources/style-guide/css/fluig-style-guide.min.css" />
+    <link type="text/css" rel="stylesheet" href="../style.css" />
+    <script type="text/javascript" src="../../resources/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../resources/js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../resources/js/mustache/mustache-min.js"></script>
+    <script type="text/javascript" src="../../resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+-->
+    <!-- Links Originais-->
+    <link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css" />
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+    <script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+</head>
+<style type="text/css">
+    #top {
+        background-color: #366092;
+        color: white;
+        margin: 0;
+        padding: 10px 0;
+    }
+    
+    #top>* {
+        padding: 0;
+        margin: 0;
+    }
+    
+    #campoCabecalho {
+        margin: 2.5rem 0;
+    }
+    
+    .comportamentos label {
+        padding: 0.2rem 0;
+        width: 100%;
+    }
+    
+    .inputCheck {
+        width: 100%;
+        display: inline-block;
+    }
+    
+    .inputCheck label {
+        width: 100%;
+    }
+    
+    @media (max-width: 768px) {
+        #campoCabecalho {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        #campoCabecalho>* {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+    }
+</style>
+
+<body>
+    <div class="fluig-style-guide">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center" id="top">
+                    <p><strong>Perfil de Vaga</strong></p>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                    <div style="background: url('http://ww2.baguete.com.br/admin//cache/image/noticias/2014/01/1390248783_totvs.jpg'); background-size: contain; background-position: center center; background-repeat: no-repeat; width: 100%; height: 9rem;"></div>
+                    <!--                    <img src="../../resources/images/totvs_logo.jpg" class="img-responsive" />-->
+                </div>
+            </div>
+            <!--
+            <div class="page-header">
+                <h1><small>PREENCHIMENTO DA ÁREA</small></h1>
+            </div>
+-->
+            <div class="panel-group" id="formularioReq">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="collapse-icon up" data-toggle="collapse" data-parent="#formularioReq" href="#collapseOne">GERAL</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <form class="form" role="form">
+                                <div class="row">
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label for="gestorSol">Gestor Solicitante</label>
+                                        <input type="zoom" id="gestor" name="gestor" data-zoom="{
+                                            'displayKey':'colleagueName',
+                                            'datasetId':'colleague',
+                                            'maximumSelectionLength':'1',
+                                            'placeholder':'Escolha o Gestor',
+                                            'fields':[
+                                                {
+                                                  'field':'colleagueName',
+                                                  'label':'Nome',
+                                                  'standard':'true'
+                                                }
+                                            ]
+                                         }" />
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label for="area">Área / Torre</label>
+                                        <input class="form-control" name="area" type="text">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12" id="w_motivoContrata">
+                                        <label for="motivoContrata">Motivo Contratação:</label>
+                                        <div class="radio inputCheck">
+                                            <label>
+                                                <input type="radio" name="motivoContrata" value="aumento" checked> AUMENTO DE QUADRO
+                                            </label>
+                                        </div>
+                                        <div class="radio inputCheck">
+                                            <label>
+                                                <input type="radio" name="motivoContrata" value="subsCol"> SUBSTITUIÇÃO DE COLABORADOR DESLIGADO
+                                                <input class="form-control" placeholder="Nome" id="nomeCol" name="nomeCol" type="text">
+                                            </label>
+                                        </div>
+                                        <div class="radio inputCheck">
+                                            <label>
+                                                <input type="radio" name="motivoContrata" value="subsColPromov">SUBSTITUIÇÃO DE COLABORADOR PROMOVIDO PARA PRÓPRIA ÁREA/TORRE
+<!--                                                <input class="form-control" placeholder="Nome" name="nomeColPromov" id="nomeColPromov" type="text">-->
+                                                <input type="zoom" id="nomeColPromov" name="nomeColPromov" data-zoom="{
+                                                    'displayKey':'colleagueName',
+                                                    'datasetId':'colleague',
+                                                    'maximumSelectionLength':'1',
+                                                    'placeholder':'Escolha o Colaborador',
+                                                    'fields':[
+                                                        {
+                                                        'field':'colleagueName',
+                                                        'label':'Nome',
+                                                        'standard':'true'
+                                                        }
+                                                    ]
+                                                }"/>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="collapse-icon" data-toggle="collapse" data-parent="#formularioReq" href="#collpaseTwo">CARGO</a>
+                        </h4>
+                    </div>
+                    <div id="collpaseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <form class="form" role="form">
+                                <div class="row">
+                                    <div class="form-group col-md-6 col-sm-12">
+                                        <label for="cargo">Cargo</label>
+                                        <input class="form-control" name="cargo" type="text">
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-12">
+                                        <label for="supImed">Superior Imediato</label>
+                                        <input type="zoom" id="supImed" name="supImed" data-zoom="{
+                                            'displayKey':'colleagueName',
+                                            'datasetId':'colleague',
+                                            'maximumSelectionLength':'1',
+                                            'placeholder':'Escolha o Superior',
+                                            'fields':[
+                                                {
+                                                  'field':'colleagueName',
+                                                  'label':'Nome',
+                                                  'standard':'true'
+                                                }
+                                            ]
+                                         }" />
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-12">
+                                        <label for="localTrab">Local de Trabalho</label>
+                                        <select class="form-control" name="localTrab">
+                                            <option>TOTVS GOIANIA</option>
+                                            <option>TOTVS BRASILIA</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6" style="padding-bottom:0; margin-bottom: 0;">
+                                        <div><label>Horário de Trabalho:</label></div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="input-group date hora" class="hora">
+                                                    <input type="text" name="hotaEntrada" class="form-control" placeholder="Entrada">
+                                                    <span class="input-group-addon">
+                                                        <span class="fluigicon fluigicon-time"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="input-group date hora">
+                                                    <input type="text" name="horaSaida" class="form-control" placeholder="Saída">
+                                                    <span class="input-group-addon">
+                                                        <span class="fluigicon fluigicon-time"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label>Especificar valores tipo: SALÁRIO FIXO, SALÁRIO VARIÁVEL, WARMUP E OUTROS</label>
+                                        <textarea name="obs" class="form-control" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label>Cursos Realizados</label>
+                                        <textarea name="obs2" class="form-control" rows="2"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <div class="col-md-3">
+                                            <label>Seleção</label>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                <input type="radio" name="tipoSelecao" id="rv_check" value="externa"> Seleção Externa
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="tipoSelecao" id="comissao" value="externa"> Seleção Interna
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Tipo de Cargo</label>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="tipoSelecao2" id="rv_check" value=""> Temporário
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="tipoSelecao2" id="comissao" value="externa"> Efetivo
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="tipoSelecao2" id="comissao" value="externa"> Cooperativa
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="tipoSelecao2" id="comissao" value="externa"> Estagiário
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="tipoSelecao2" id="comissao" value="externa"> Pessoa Jurídica
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Escolaridade</label>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="escolaridade" id="rv_check" value=""> Segundo Grau Completo
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="escolaridade" id="rv_check" value=""> Superior Incompleto
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="escolaridade" id="rv_check" value=""> Superior Completo
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="escolaridade" id="rv_check" value=""> Pós-Graduação
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Realizar</label>
+                                            <div class="checkbox">
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" name="realizar01" id="" value="Testes Específicos"> Testes Específicos
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" name="realizar02" id="" value="Avaliação de Perfil"> Avaliação de Perfil
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" name="realizar03" id="" value="Confirmação de Referências"> Confirmação de Referências
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" name="realizar04" id="" value="Anúncio em Redes Sociais"> Anúncio em Redes Sociais
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <textarea name="obs3" placeholder="OBS.:" class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="collapse-icon" data-toggle="collapse" data-parent="#formularioReq" href="#collpaseThree">DESCRIÇÃO DA FUNÇÃO</a>
+                        </h4>
+                    </div>
+                    <div id="collpaseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <form class="form" role="form">
+                                <div class="row">
+                                    <div class="form-group col-md-4 col-sm-12">
+                                        <label for="estadoCivil">Estado Civil</label>
+                                        <select class="form-control" name="estadoCivil">
+                                            <option value="">Selecione</option>
+                                            <option value="solteiro">Solteiro</option>
+                                            <option value="casado">Casado</option>
+                                            <option value="viuvo">Viúvo</option>
+                                            <option value="separado">Separado Judicialmente</option>
+                                            <option value="divorciado">Divorciado</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-4 col-sm-12">
+                                        <label for="nivel">Nível</label>
+                                        <input class="form-control" name="nivel" type="text">
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-12">
+                                        <label for="faixaEtaria">Faixa Etária</label>
+                                        <input class="form-control" name="faixaEtaria" type="text">
+                                    </div>
+                                    <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                        <label>Idiomas</label>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkIdiomas" value="ingles"> Inglês
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkIdiomas01" value="espanhol"> Espanhol
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkIdiomas02" value="indiferente"> Indiferente
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                        <label>Sexo</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="Sexo" value="masc"> Masculino
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="Sexo" value="fem"> Feminino
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="Sexo" value="indiferente"> Indiferente
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                        <label>Veículo Próprio</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="idiomas" value="sim"> Sim
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="idiomas" value="nao"> Não
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                        <label>Noteboook</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="Noteboook" value="sim"> Sim
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="Noteboook" value="nao"> Não
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                        <label>Execução de atividades</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="ativEx" value="sim"> Interno
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="ativEx" value="nao"> Externo
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="ativEx" value="nao"> Misto
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2 col-sm-2 col-xs-12">
+                                        <label>Disponibilidade</label>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="disp01" value="sim"> Viagens
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="disp02" value="nao"> Mudança
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-2 col-xs-12">
+                                        <label>Conhecimentos Específicos</label>
+                                        <textarea name="conhecimentosEsp" class="form-control"></textarea>
+                                        <p class="help-block">Preencher apenas caso necessário ter algum conhecimento técnico específico.</p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var hora = FLUIGC.calendar('.hora', {
+            pickDate: false,
+            pickTime: true
+        });
+
+        $(document).ready(function() {
+            
+            $('#nomeCol').prop('disabled', true); 
+            $('#nomeColPromov').prop('disabled', true);
+            
+            $('input[type=radio][name=motivoContrata]').change(function() {
+//                alert(this.value);
+                if (this.value == 'subsCol') {
+                    $('#nomeCol').prop('disabled', false);
+                    $('#nomeColPromov').prop('disabled', true);
+                } else if (this.value == 'subsColPromov') {
+                    $('#nomeColPromov').prop('disabled', false);
+                    $('#nomeCol').prop('disabled', true);
+                } else {
+                    $('#nomeCol').prop('disabled', true); 
+                    $('#nomeColPromov').prop('disabled', true);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
